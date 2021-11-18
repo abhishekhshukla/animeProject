@@ -8,7 +8,7 @@ const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const port = process.env.PORT || 8080;
 const url = process.env.MONGOLAB_URI || "mongodb://localhost:27017/practise";
-mongoose.connect("mongodb://localhost:27017/practise",{useNewUrlParser:true},(err)=>{
+mongoose.connect(url,{useNewUrlParser:true},(err)=>{
     if(err!=null) console.log(err)
     else{
         app.listen(port,()=>{
