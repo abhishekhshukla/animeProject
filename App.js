@@ -1,4 +1,4 @@
-const express     = require("express");
+const express     = require("express");    // All Required Dependecies
 const app         = express();
 const bodyParser  = require("body-parser");
 const mongoose    = require("mongoose");
@@ -18,8 +18,8 @@ mongoose.connect(url,{useNewUrlParser:true},(err)=>{
     }
 })
 
-const User=require("./models/user")
-const Comment=require("./models/comments")
+const User=require("./models/user")             // User schema for login and comment purpose
+const Comment=require("./models/comments")       // Comments
 const index=require("./routes/index")
 const home=require("./routes/home")
 
@@ -33,19 +33,19 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 
-app.use(require("express-session")({
+app.use(require("express-session")({                           //  session for login purpose
 	secret: "My Secret Key",
 	resave: false,
 	saveUninitialized: false
 }));
-
-app.use(passport.initialize());
+  
+app.use(passport.initialize());                        // Passport.js used for authentication and to save password securely
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));     
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req, res, next){
+app.use(function(req, res, next){                      
 	res.locals.currentUser = req.user;
 	res.locals.error = req.flash("error");
    	res.locals.success = req.flash("success");
@@ -54,7 +54,7 @@ app.use(function(req, res, next){
 
 
 
-app.use("/",index);
-app.use("/home",home);
+app.use("/",index);            // Router for Landing and login/ signup
+app.use("/home",home);       // All anime Information handeld by this
 
 
