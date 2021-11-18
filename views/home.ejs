@@ -1,0 +1,45 @@
+
+<%- include ("partials/header") %>
+
+
+        
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1 style="margin-left: 100px;">Welcome to Anime world</h1>
+			<p></p>
+			<p>
+				<a style="margin-left: 33%;" href="home/search" class="btn btn-primary btn-large">Search Your Favourate Anmie</a>
+			</p>
+		</div>
+	</header>
+
+  <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+   
+              
+                 <% cmp.forEach(function(index){ %>
+                  <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+
+               <img src="<%= index.cover_image%>" alt="" srcset="">
+
+               <div class="caption">
+                <h4> <%= index.titles.en  %> </h4>
+                <h7>Score <%= index.score%>            <a href="<%= index.trailer_url%>">Watch Trailer</a></h7>
+              </div>
+              <p>
+                <a href="/home/getAnime/<%= index.id %>" class="btn btn-primary">More Info</a>
+              </p>
+
+              </div>
+            </div>
+
+               <%}) %>
+            
+            
+
+
+
+       </div>
+       </div>
+       <%- include ("partials/footer") %>

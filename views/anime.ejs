@@ -1,0 +1,70 @@
+<%- include ("partials/header") %>
+
+        <div class="col-md-9" style="margin-left: 12%;">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= cmp.banner_image %>" alt="<%= cmp.cover_image %>">
+                <div class="caption-full">
+                    <h1 style="display: flex; justify-content: center; cursor: pointer;"><a><%=cmp.titles.en%></a></h4>
+                        
+                        <h4 style="float: right;">Anime Id:<%= cmp.id %></h4>
+                        <h4>Year:<%=cmp.season_year%></h4>
+                        <h4 >Seasons <%= cmp.season_period %></h4>
+                        
+                        <% cmp.genres.forEach(function(index){ %>
+                            <div style="display: inline-block; padding: 10px; background-color: gainsboro; border-radius: 10px; margin-top:10px ;"> <%= index%></div>
+                            
+                            <%}) %>
+                            <p></p>
+                            
+                            <h4 style="float: right;"> Score: <%=cmp.score%></h4>
+                            <h4 >Episode Duration <%= cmp.episode_duration %>  </h4>
+                            <p></p>
+                  
+                 <p style=" display: inline-block; font-size: large; font-weight: bold;">English:  <%= cmp.descriptions.en %></p>
+                 <p></p>
+                 <p style="display: inline-block; font-size: large; font-weight: bold;">Italian: <%= cmp.descriptions.it %> </p>
+                 
+                    <h4> Start Date: <%=cmp.start_date%> </h4>
+                    <h4> End Date:  <%=cmp.end_date%> </h4>
+                    <!-- <h4> Genres <%=cmp.genres%> </h4> -->
+                   
+                </div>
+            </div>
+
+
+            
+            <div class="well">
+                <% if(currentUser) {%>
+                <div class="text-right">
+                    <a class="btn btn-success" href="/home/comment/<%= cmp.id%>">Add New Comment</a>
+                </div>
+                <%}%>
+                <hr>
+                <% comments.forEach(function(comment){ %>
+                    <% if( comment.animeId==cmp.id){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <h4>
+                                <strong><%= comment.username %></strong>: <%= comment.text %>
+                            </h4>
+                              <h4 >Rating:<%for(var i=0;i<comment.rating;i++) {%> ⭐ <%}%></h4></p>
+
+                              <% if(currentUser && currentUser.username==comment.username){ %>
+                                <form class="delete-form" action="/home/delete/<%= cmp.id%>" method="get">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
+
+                <% }) %>
+            </div>
+
+
+        </div>
+
+           
+
+
