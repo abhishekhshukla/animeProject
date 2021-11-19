@@ -8,9 +8,9 @@ const mongoose=require("mongoose")
 router.get("/", async (req,res)=>{                 // This is for landing Page will Display Some randome Anime based on Popularity 
    await request(`https://api.aniapi.com/v1/anime/`, (error,response,body)=>{
       if(error) console.log("erroe")
-      let x=  JSON.parse(body);
-      let y=x.data.documents;
-     res.render("home",{cmp:y});                // rendring ejs file for frontend
+      let jsonFormate=  JSON.parse(body);
+      let docs=jsonFormate.data.documents;
+     res.render("home",{cmp:docs});                // rendring ejs file for frontend
 
 })
 
